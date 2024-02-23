@@ -1,0 +1,63 @@
+#include <iostream>
+
+using namespace std;
+class Node{
+public:
+    int data;
+    Node* next;
+
+    Node(int data){
+    this->data=data;
+    this->next=nullptr;
+    }
+};
+
+class linkedList{
+private:
+    Node* head=nullptr;
+public:
+    linkedList(){
+         head=nullptr;}
+//insert node at head
+    void insertAtHead(int data){
+    Node* newNode=new Node(data);
+    newNode->next=head;
+    head=newNode;
+    }
+//Delete node by value
+    void del_by_value(int value){
+    Node* current=head;
+    Node* prev=nullptr;
+    while(current!=nullptr && current->data!=value){
+        prev=current;
+        current=current->next;
+    }
+    if(current==nullptr){
+       cout<<"Not found";
+    }
+    if(prev==nullptr){
+        head=current->next;
+    }else{
+    prev->next=current->next;
+    }
+    delete current;
+    }
+//Print list
+    void printList(){
+    Node* temp=head;
+    while(temp!=nullptr){
+        cout<<temp->data<<" ";
+        temp=temp->next;
+    }
+    }
+};
+int main()
+{
+    linkedList list;
+    list.insertAtHead(1);
+    list.insertAtHead(2);
+    list.insertAtHead(3);
+    list.insertAtHead(4);
+    list.del_by_value(3);
+    list.printList();
+}
